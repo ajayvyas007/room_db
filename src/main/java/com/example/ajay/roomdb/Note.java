@@ -26,6 +26,8 @@ public class Note implements Serializable {
     //@TypeConverters({DateRoomConverter.class})
     private Date date;
 
+    private String migrate;
+
 //    public Note(int note_id, String content, String title, Date date) {
 //        this.note_id = note_id;
 //        this.content = content;
@@ -33,10 +35,19 @@ public class Note implements Serializable {
 //        this.date = date;
 //    }
 
-    public Note(String content, String title) {
+    public Note(String content, String title,String migrate) {
         this.content = content;
         this.title = title;
         this.date = new Date(System.currentTimeMillis());
+        this.migrate = migrate;
+    }
+
+    public String getMigrate() {
+        return migrate;
+    }
+
+    public void setMigrate(String migrate) {
+        this.migrate = migrate;
     }
 
     @Ignore
@@ -100,7 +111,8 @@ public class Note implements Serializable {
                 "note_id=" + note_id +
                 ", content='" + content + '\'' +
                 ", title='" + title + '\'' +
-                ", date=" + date +
+                ", date=" + date +'\''+
+                ", migrate=" +migrate+
                 '}';
     }
 }

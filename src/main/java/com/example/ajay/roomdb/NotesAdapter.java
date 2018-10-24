@@ -36,6 +36,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.BeanHolder> 
         Log.e("bind", "onBindViewHolder: "+ list.get(position));
         holder.textViewTitle.setText(list.get(position).getTitle());
         holder.textViewContent.setText(list.get(position).getContent());
+        holder.migrate.setText(list.get(position).getMigrate());
     }
 
     @Override
@@ -46,12 +47,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.BeanHolder> 
     public class BeanHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewContent;
-        TextView textViewTitle;
+        TextView textViewTitle,migrate;
         public BeanHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             textViewContent = itemView.findViewById(R.id.item_text);
             textViewTitle = itemView.findViewById(R.id.tv_title);
+            migrate = itemView.findViewById(R.id.migrate);
         }
 
         @Override

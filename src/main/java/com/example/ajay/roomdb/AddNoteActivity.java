@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 
 public class AddNoteActivity extends AppCompatActivity {
 
-    private TextInputEditText et_title,et_content;
+    private TextInputEditText et_title,et_content,et_migrate;
     private NoteDatabase noteDatabase;
     private Note note;
     private boolean update;
@@ -24,6 +24,7 @@ public class AddNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_note);
         et_title = findViewById(R.id.et_title);
         et_content = findViewById(R.id.et_content);
+        et_migrate = findViewById(R.id.et_migrate);
         noteDatabase = NoteDatabase.getInstance(AddNoteActivity.this);
         Button button = findViewById(R.id.but_save);
         if ( (note = (Note) getIntent().getSerializableExtra("note"))!=null ){
@@ -32,6 +33,7 @@ public class AddNoteActivity extends AppCompatActivity {
             button.setText("Update");
             et_title.setText(note.getTitle());
             et_content.setText(note.getContent());
+            et_migrate.setText(note.getMigrate());
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +44,7 @@ public class AddNoteActivity extends AppCompatActivity {
                     noteDatabase.getnoteDao().updateNote(note);
                     setResult(note,2);
                 }else {
-                    note = new Note(et_content.getText().toString(), et_title.getText().toString());
+                    note = new Note(et_content.getText().toString(), et_title.getText().toString(),et_migrate.getText().toString());
                     new InsertTask(AddNoteActivity.this,note).execute();
                 }
             }
